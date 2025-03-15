@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+
+        /* Pop-up styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #countdown {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff5733;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Balloon animation */
+        .balloon {
+            position: absolute;
+            bottom: 0;
+            animation: floatBalloon 10s infinite;
+        }
+
+        @keyframes floatBalloon {
+            0% {
+                bottom: 0;
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            50% {
+                bottom: 80%;
+                opacity: 0.8;
+                transform: scale(1.2) translateY(-200px);
+            }
+            100% {
+                bottom: 0;
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="openPopup()">🎂 Click to Open Birthday Pop-up 🎉</button>
+
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+    <div class="popup" id="popup">
+        <h2>Happy Birthday, MR. OSEI BARIMAH! 🎉</h2>
+        <img src="MR OSEI.jpg" alt="Birthday Person" width="200" style="border-radius: 50%;">
+        <p>Wishing you a fantastic year ahead filled with joy and success! 🎂🥳</p>
+        <p id="countdown"></p>
+
+        <div class="message">
+            <p><strong>BOAKYEWAA:</strong> "My love, you make every day brighter. Happy birthday, my one and only!" 💖</p>
+            <p><strong>DAVID:</strong> "Dad, you're the best! Wishing you a wonderful year ahead. Love you!" 🎉</p>
+            <p><strong>VANESSA:</strong> "Happy birthday, Dad! Thanks for being the greatest father ever! 💐"</p>
+            <p><strong>JOSEPH:</strong> "Dad, you're the superhero of our family! Have a fantastic 🎈birthday!" 🦸‍♂️</p>
+            <p><strong>SAMUEL:</strong> "Happy birthday, Daddy! I love you so much!" 🎉</p>
+        </div>
+
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="balloon" style="left: 10%; animation-delay: 0s;">
+        <img src="BALLOON.jpeg" alt="Balloon" width="80" height="120">
+    </div>
+    <div class="balloon" style="left: 50%; animation-delay: 2s;">
+        <img src="BALLOON.jpeg" alt="Balloon" width="80" height="120">
+    </div>
+    <div class="balloon" style="left: 80%; animation-delay: 4s;">
+        <img src="BALLOON.jpeg" alt="Balloon" width="80" height="120">
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Set the countdown for tomorrow
+        let now = new Date();
+        let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+
+        function updateCountdown() {
+            let currentTime = new Date().getTime();
+            let timeLeft = tomorrow - currentTime;
+
+            let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            if (timeLeft > 0) {
+                document.getElementById("countdown").innerHTML = 
+                    `🎉 Birthday in: ${hours}h ${minutes}m ${seconds}s 🎂`;
+            } else {
+                document.getElementById("countdown").innerHTML = "🎊 It's John's Birthday! 🥳";
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+</body>
+</html>
